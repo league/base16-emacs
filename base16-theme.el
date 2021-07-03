@@ -239,6 +239,12 @@ return the actual color value.  Otherwise return the value unchanged."
      (font-lock-variable-name-face                 :foreground base08)
      (font-lock-warning-face                       :foreground base08)
 
+;;;; bookmark
+     (bookmark-face :box (:line-width (4 . 2) :color base0B :style nil) :extend t)
+
+;;;; info
+     (info-menu-star :foreground base08)
+
 ;;;; isearch
      (match                                        :foreground base0D :background base01 :inverse-video t)
      (isearch                                      :foreground base0A :background base01 :inverse-video t)
