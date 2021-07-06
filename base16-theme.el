@@ -780,6 +780,7 @@ return the actual color value.  Otherwise return the value unchanged."
      (notmuch-search-count :foreground base03)
      (notmuch-search-matching-authors :foreground base0B)
      (notmuch-search-non-matching-authors :foreground base0C)
+     (notmuch-search-flagged-face :foreground base0E :weight bold)
      (notmuch-tag-face :foreground base0D)
      (notmuch-tag-unread :foreground base0F)
      (message-mml :foreground base0C :underline t)
