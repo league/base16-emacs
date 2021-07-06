@@ -240,7 +240,7 @@ return the actual color value.  Otherwise return the value unchanged."
      (font-lock-warning-face                       :foreground base08)
 
 ;;;; bookmark
-     (bookmark-face :box (:line-width (4 . 2) :color base0B :style nil) :extend t)
+     (bookmark-face :box (:line-width (2 . 2) :color base0B :style nil) :extend t)
 
 ;;;; info
      (info-menu-star :foreground base08)
@@ -773,6 +773,16 @@ return the actual color value.  Otherwise return the value unchanged."
      (mmm-code-submode-face                        :background base03)
      (mmm-comment-submode-face                     :inherit font-lock-comment-face)
      (mmm-output-submode-face                      :background base03)
+
+;;;; notmuch
+     (notmuch-message-summary-face :background base01)
+     (notmuch-search-date :foreground base0A)
+     (notmuch-search-count :foreground base03)
+     (notmuch-search-matching-authors :foreground base0B)
+     (notmuch-search-non-matching-authors :foreground base0C)
+     (notmuch-tag-face :foreground base0D)
+     (notmuch-tag-unread :foreground base0F)
+     (message-mml :foreground base0C :underline t)
 
 ;;;; nxml-mode
      (nxml-name-face                               :foreground unspecified :inherit font-lock-constant-face)

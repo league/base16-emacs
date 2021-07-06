@@ -11,10 +11,25 @@
 
 (require 'base16-theme)
 
+;; ChangeLog: The base2 #8a8585 used for active mode-line background
+;; was too dark for some of the colors to show up. But base2 is also
+;; used for the comment-delimiter so has to contrast with foreground
+;; of base0, so a balance must be struck. Here are the HSV’s for the
+;; shade spectrum:
+
+;;   0 #f4ecec H=0 S=3 V=96
+;;   1 #e7dfdf   0   3   91 Δ= 5
+;;   2 #8a8585   0   4   54 Δ=37 → Δ′=21 V=70 #b2abab
+;;   3 #7e7777   0   6   49 Δ= 5
+;;   4 #655d5d   0   8   40 Δ= 9
+;;   5 #585050   0   9   35 Δ= 5
+;;   6 #292424   0  12   16 Δ=19
+;;   7 #1b1818   0  11   11 Δ= 5
+
 (defvar base16-atelier-plateau-light-colors
   '(:base00 "#f4ecec"
     :base01 "#e7dfdf"
-    :base02 "#8a8585"
+    :base02 "#b2abab"
     :base03 "#7e7777"
     :base04 "#655d5d"
     :base05 "#585050"
