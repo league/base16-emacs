@@ -11,14 +11,26 @@
 
 (require 'base16-theme)
 
+;; ChangeLog: the comments (base3) and delimiters (base2) were too
+;; light. For all these shades, saturation=0, hue=undefined.
+
+;;   0 #f8f8f8 V97.3       Increase deltas by ~25%  Or by 40%:
+;;   1 #e8e8e8  91.0 Δ6.3  Δ'=7.9 V'=89.4 #e4e4e4    8.8 88.5 #e2e2e2
+;;   2 #d8d8d8  84.7  6.3     7.9    81.5 #d0d0d0    8.8 79.7 #cbcbcb
+;;   3 #b8b8b8  72.2 12.5    15.6    65.9 #a8a8a8   17.5 62.2 #9f9f9f
+;;   4 #585858  34.5 37.7    25.1    40.8 #686868   17.7 44.5 #717171
+;;   5 #383838  22.0 12.5    15.6    25.2 #404040   17.5 27.0 #454545
+;;   6 #282828  15.7  6.3     7.9    17.3 #2c2c2c    8.8 18.2 #2e2e2e
+;;   7 #181818   9.4  6.3     7.9     9.4 #181818    8.8  9.4 #181818
+
 (defvar base16-mexico-light-colors
   '(:base00 "#f8f8f8"
-    :base01 "#e8e8e8"
-    :base02 "#d8d8d8"
-    :base03 "#b8b8b8"
-    :base04 "#585858"
-    :base05 "#383838"
-    :base06 "#282828"
+    :base01 "#e2e2e2"
+    :base02 "#cbcbcb"
+    :base03 "#9f9f9f"
+    :base04 "#717171"
+    :base05 "#454545"
+    :base06 "#2e2e2e"
     :base07 "#181818"
     :base08 "#ab4642"
     :base09 "#dc9656"
