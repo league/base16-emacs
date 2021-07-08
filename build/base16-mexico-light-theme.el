@@ -23,6 +23,12 @@
 ;;   6 #282828  15.7  6.3     7.9    17.3 #2c2c2c    8.8 18.2 #2e2e2e
 ;;   7 #181818   9.4  6.3     7.9     9.4 #181818    8.8  9.4 #181818
 
+;; Also, baseA just slightly too bright, especially on base1 or base2.
+
+;; F #a16946 H=23 S=57 V=63
+;; 9 #dc9656 H=29 S=61 V=86 V'=80 #cc8b4f
+;; A #f79a0e H=36 S=94 V=97 V'=80 #cc7f0c H'=46 #cc9f0c
+
 (defvar base16-mexico-light-colors
   '(:base00 "#f8f8f8"
     :base01 "#e2e2e2"
@@ -33,8 +39,8 @@
     :base06 "#2e2e2e"
     :base07 "#181818"
     :base08 "#ab4642"
-    :base09 "#dc9656"
-    :base0A "#f79a0e"
+    :base09 "#cc8b4f"
+    :base0A "#cc9f0c"
     :base0B "#538947"
     :base0C "#4b8093"
     :base0D "#7cafc2"
