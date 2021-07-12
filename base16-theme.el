@@ -1021,8 +1021,9 @@ return the actual color value.  Otherwise return the value unchanged."
 (and load-file-name
      (boundp 'custom-theme-load-path)
      (add-to-list 'custom-theme-load-path
-                  (file-name-as-directory
-                   (file-name-directory load-file-name))))
+                  (concat (file-name-as-directory
+			   (file-name-directory load-file-name))
+			  "build/")))
 
 (provide 'base16-theme)
 
