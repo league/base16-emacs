@@ -207,6 +207,7 @@ return the actual color value.  Otherwise return the value unchanged."
      (warning                                      :foreground base09 :weight bold)
      (success                                      :foreground base0B :weight bold)
      (shadow                                       :foreground base03)
+     (fill-column-indicator :foreground base02)
 
 ;;;; compilation
      (compilation-column-number                    :foreground base0A)
