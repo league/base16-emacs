@@ -14,6 +14,10 @@
 
 ;;; Code:
 
+(eval-when-compile
+  (require 'cl-macs))
+(require 'color)
+
 (defcustom base16-theme-256-color-source 'terminal
   "Where to get the colors in a 256-color terminal.
 
@@ -177,8 +181,30 @@ return the actual color value.  Otherwise return the value unchanged."
                      (base16-transform-face face colors))
                  faces)))
 
+(defun base16-interpolate (color1 color2)
+  "Average two hex colors COLOR1 and COLOR2, to get their mixed color."
+  (let ((rgb1 (color-name-to-rgb color1))
+	(rgb2 (color-name-to-rgb color2)))
+    (color-rgb-to-hex
+     (/ (+ (elt rgb1 0) (elt rgb2 0)) 2)
+     (/ (+ (elt rgb1 1) (elt rgb2 1)) 2)
+     (/ (+ (elt rgb1 2) (elt rgb2 2)) 2)
+     2)))
+
 (defun base16-theme-define (theme-name theme-colors)
   "Define the faces for a base16 colorscheme given a `THEME-NAME' and a plist of `THEME-COLORS'."
+  ;; Augment the accent colors (base08-0F) as corresponding background color
+  ;; (base08bg-0Fbg) by averaging with base00.
+  (cl-loop
+   for x from #x8 to #xf do
+   (let* ((baseX (format ":base%02X" x))
+	  (baseXbg (intern (concat baseX "bg"))))
+     (setq theme-colors
+	   (cons baseXbg
+		 (cons (base16-interpolate
+			  (plist-get theme-colors :base00)
+			  (plist-get theme-colors (intern baseX)))
+		       theme-colors)))))
   (base16-set-faces
    theme-name
    theme-colors
@@ -348,9 +374,9 @@ return the actual color value.  Otherwise return the value unchanged."
      (csv-separator-face                           :foreground base09)
 
 ;;;; diff-hl-mode
-     (diff-hl-change                               :foreground base0E)
-     (diff-hl-delete                               :foreground base08)
-     (diff-hl-insert                               :foreground base0B)
+     (diff-hl-change :foreground base0E :background base0Ebg)
+     (diff-hl-delete :foreground base08 :background base08bg)
+     (diff-hl-insert :foreground base0B :background base0Bbg)
 
 ;;;; diff-mode
      (diff-added                                   :foreground base0B)
