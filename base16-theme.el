@@ -835,6 +835,7 @@ return the actual color value.  Otherwise return the value unchanged."
      (org-document-info-keyword                    :foreground base0B)
      (org-document-title                           :foreground base09 :weight bold :height 1.44)
      (org-done                                     :foreground base0B :background base01)
+     (org-drawer :foreground base03)
      (org-ellipsis                                 :foreground base04)
      (org-footnote                                 :foreground base0C)
      (org-formula                                  :foreground base08)
