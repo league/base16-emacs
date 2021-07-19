@@ -773,7 +773,7 @@ return the actual color value.  Otherwise return the value unchanged."
      (magit-signature-good                         :foreground base0B)
      (magit-signature-revoked                      :foreground base0E)
      (magit-signature-untrusted                    :foreground base0C)
-     (magit-tag                                    :foreground base05)
+     (magit-tag                                    :foreground base0F)
 ;;;; mark-multiple
      (mm/master-face                               :foreground nil :background nil :inherit region)
      (mm/mirror-face                               :foreground nil :background nil :inherit region)
