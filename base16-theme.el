@@ -181,14 +181,18 @@ return the actual color value.  Otherwise return the value unchanged."
                      (base16-transform-face face colors))
                  faces)))
 
-(defun base16-interpolate (color1 color2)
-  "Average two hex colors COLOR1 and COLOR2, to get their mixed color."
+(defun base16-interpolate (color1 color2 &optional weight)
+  "Average two hex colors COLOR1 and COLOR2, to get their mixed color.
+WEIGHT should be a float in the range 0-1 (or nil to use 0.5). It
+is the weight given to COLOR1."
+  (unless weight (setq weight 0.5))
   (let ((rgb1 (color-name-to-rgb color1))
-	(rgb2 (color-name-to-rgb color2)))
+	(rgb2 (color-name-to-rgb color2))
+	(w2 (- 1 weight)))
     (color-rgb-to-hex
-     (/ (+ (elt rgb1 0) (elt rgb2 0)) 2)
-     (/ (+ (elt rgb1 1) (elt rgb2 1)) 2)
-     (/ (+ (elt rgb1 2) (elt rgb2 2)) 2)
+     (+ (* weight (elt rgb1 0)) (* w2 (elt rgb2 0)))
+     (+ (* weight (elt rgb1 1)) (* w2 (elt rgb2 1)))
+     (+ (* weight (elt rgb1 2)) (* w2 (elt rgb2 2)))
      2)))
 
 (defun base16-theme-define (theme-name theme-colors)
@@ -198,13 +202,20 @@ return the actual color value.  Otherwise return the value unchanged."
   (cl-loop
    for x from #x8 to #xf do
    (let* ((baseX (format ":base%02X" x))
-	  (baseXbg (intern (concat baseX "bg"))))
+	  (baseXbg (intern (concat baseX "bg")))
+	  (baseXbbg (intern (concat baseX "bbg"))))
      (setq theme-colors
-	   (cons baseXbg
-		 (cons (base16-interpolate
-			  (plist-get theme-colors :base00)
-			  (plist-get theme-colors (intern baseX)))
-		       theme-colors)))))
+	   (append
+	    (list baseXbg		;; equal parts baseX and base00
+		  (base16-interpolate
+		   (plist-get theme-colors :base00)
+		   (plist-get theme-colors (intern baseX)))
+		  baseXbbg		;; much closer to background
+		  (base16-interpolate
+		   (plist-get theme-colors :base00)
+		   (plist-get theme-colors (intern baseX))
+		   0.85))
+	    theme-colors))))
   (base16-set-faces
    theme-name
    theme-colors
@@ -1004,14 +1015,14 @@ return the actual color value.  Otherwise return the value unchanged."
 ;;;; whitespace-mode
      (whitespace-empty                             :foreground base08 :background base0A)
      (whitespace-hspace                            :foreground base04 :background base04)
-     (whitespace-indentation                       :foreground base08 :background base0A)
+     (whitespace-indentation                       :foreground base0Abg :background base0Abbg)
      (whitespace-line                              :foreground base0F :background base01)
      (whitespace-newline                           :foreground base04)
      (whitespace-space                             :foreground base03 :background base01)
      (whitespace-space-after-tab                   :foreground base08 :background base0A)
      (whitespace-space-before-tab                  :foreground base08 :background base09)
-     (whitespace-tab                               :foreground base03 :background base01)
-     (whitespace-trailing                          :foreground base0A :background base08)))
+     (whitespace-tab                               :foreground base09bg :background base09bbg)
+     (whitespace-trailing                          :foreground base08bg :background base08bbg)))
 
   ;; Anything leftover that doesn't fall neatly into a face goes here.
   (let ((base00 (plist-get theme-colors :base00))
