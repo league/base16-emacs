@@ -214,7 +214,7 @@ is the weight given to COLOR1."
 		  (base16-interpolate
 		   (plist-get theme-colors :base00)
 		   (plist-get theme-colors (intern baseX))
-		   0.85))
+		   0.92))
 	    theme-colors))))
   (base16-set-faces
    theme-name
@@ -844,7 +844,7 @@ is the weight given to COLOR1."
      (org-date                                     :foreground base0E :underline t)
      (org-document-info                            :foreground base0C)
      (org-document-info-keyword                    :foreground base0B)
-     (org-document-title                           :foreground base09 :weight bold :height 1.44)
+     (org-document-title                           :foreground base09 :weight bold :height 1.2)
      (org-done                                     :foreground base0B :background base01)
      (org-drawer :foreground base03)
      (org-ellipsis                                 :foreground base04)
