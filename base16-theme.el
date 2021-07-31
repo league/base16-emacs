@@ -202,20 +202,23 @@ is the weight given to COLOR1."
   (cl-loop
    for x from #x8 to #xf do
    (let* ((baseX (format ":base%02X" x))
-	  (baseXbg (intern (concat baseX "bg")))
-	  (baseXbbg (intern (concat baseX "bbg"))))
+          (baseXbg (intern (concat baseX "bg")))
+          (baseXbbg (intern (concat baseX "bbg"))))
      (setq theme-colors
-	   (append
-	    (list baseXbg		;; equal parts baseX and base00
-		  (base16-interpolate
-		   (plist-get theme-colors :base00)
-		   (plist-get theme-colors (intern baseX)))
-		  baseXbbg		;; much closer to background
-		  (base16-interpolate
-		   (plist-get theme-colors :base00)
-		   (plist-get theme-colors (intern baseX))
-		   0.92))
-	    theme-colors))))
+           (plist-put theme-colors baseXbg
+                      (base16-interpolate
+                       (plist-get theme-colors :base00)
+                       (plist-get theme-colors (intern baseX)))))
+     (setq theme-colors
+           (plist-put theme-colors baseXbbg
+                      (base16-interpolate
+                       (plist-get theme-colors :base00)
+                       (plist-get theme-colors (intern baseX))
+                       0.92)))))
+  ;; Should underlines for inline links be same color (t) or near-background
+  ;; (such as base03)? Decide here.
+  (setq theme-colors (plist-put theme-colors :baseUL
+                                (plist-get theme-colors :base03)))
   (base16-set-faces
    theme-name
    theme-colors
@@ -230,8 +233,8 @@ is the weight given to COLOR1."
      (gui-element                                  :background base01)
      (header-line                                  :foreground base0E :background nil :inherit mode-line)
      (highlight                                    :background base01)
-     (link                                         :foreground base0D :underline t)
-     (link-visited                                 :foreground base0E :underline t)
+     (link                                         :foreground base0D :underline baseUL)
+     (link-visited                                 :foreground base0E :underline baseUL)
      (minibuffer-prompt                            :foreground base0D)
      (region                                       :background base02 :distant-foreground base05)
      (secondary-selection                          :background base03 :distant-foreground base05)
@@ -791,7 +794,7 @@ is the weight given to COLOR1."
 
 ;;;; markdown-mode
      (markdown-url-face                            :inherit link)
-     (markdown-link-face                           :foreground base0D :underline t)
+     (markdown-link-face                           :foreground base0D :underline baseUL)
 
 ;;;; message-mode
      (message-header-other                         :foreground nil :background nil :weight normal)
@@ -841,7 +844,7 @@ is the weight given to COLOR1."
      (org-code                                     :foreground base0A)
      (org-column                                   :background base01)
      (org-column-title                             :weight bold :underline t :inherit org-column)
-     (org-date                                     :foreground base0E :underline t)
+     (org-date                                     :foreground base0E :underline baseUL)
      (org-document-info                            :foreground base0C)
      (org-document-info-keyword                    :foreground base0B)
      (org-document-title                           :foreground base09 :weight bold :height 1.2)
@@ -851,7 +854,7 @@ is the weight given to COLOR1."
      (org-footnote                                 :foreground base0C)
      (org-formula                                  :foreground base08)
      (org-hide                                     :foreground base03)
-     (org-link                                     :foreground base0D)
+     (org-link                                     :foreground base0D :underline baseUL)
      (org-scheduled                                :foreground base0B)
      (org-scheduled-previously                     :foreground base09)
      (org-scheduled-today                          :foreground base0B)
